@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}LifeScore{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>Hello, {% if name %}{{ name }}{% else %}Stranger{% endif %}!</h1>
+</div>
+
+    <p align="center"><a href=user ><button class=grey style="height:75px;width:150px">Enter User Data</button></a></p>
+<p align="center"><a href=bmi ><button class=grey style="height:75px;width:150px">See BMI Graph</button></a></p>
+    <p align="center"><a href=stroke ><button class=grey style="height:75px;width:150px">Compute Stroke Risk</button></a></p>
+    <p align="center"><a href=heart ><button class=grey style="height:75px;width:150px">Compute Heart Attack Risk</button></a></p>
+
+
+
+{{ wtf.quick_form(form) }}
+{% endblock %}
+
+
+
+<p>
+{% if result != None %}
+<img src="{{ result }}" width=500 alt="">
+{% endif %}
+</p>
