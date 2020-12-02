@@ -71,6 +71,16 @@ class DiabetesDataForm(Form):
     ActivityLevel = SelectField(label='Activity Level', choices=choices, validators=v)
 
 
+class CholesterolDataForm(Form):
+    choices = ['female', 'male']
+    Gender = SelectField(label='Gender', choices=choices, validators=v)
+    Age = FloatField(label='Age', default=50.0, validators=v)
+
+    LDL = FloatField(label='LDL', default=100, validators=v)
+    HDL = FloatField(label='HDL', default=50, validators=v)
+    Triglycerides = FloatField(label='Triglycerides', default=150, validators=v)
+
+
 class StrokeDataForm(Form):
 
     choices = ['female', 'male']

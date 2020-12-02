@@ -1,10 +1,8 @@
-from model import UserDataForm, BmiForm, HeartAttackDataForm, NameForm, StrokeDataForm, DiabetesDataForm
 from flask import Flask, render_template, request, flash, url_for, session, redirect
-
-from compute import compute_bmi, compute_stroke_risk, compute_heart_attack_risk
-import sys
 from flask_bootstrap import Bootstrap
 
+from compute import compute_bmi, compute_stroke_risk, compute_heart_attack_risk, compute_cholesterol_risk
+from model import UserDataForm, BmiForm, HeartAttackDataForm, NameForm, StrokeDataForm, CholesterolDataForm
 
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
@@ -120,6 +118,31 @@ def heart_attack_assessment():
     form = HeartAttackDataForm(request.form)
     if request.method == 'POST' and form.validate():
         result = compute_heart_attack_risk(form.SystolicBloodPressure.data)
+    else:
+        result = None
+
+    return render_template('view.html', form=form, result=result)
+
+
+def update_session_variables_cholesterol(form):
+    if form.Age:
+        session['age'] = form.Age
+    if form.Gender:
+        session['gender'] = form.Gender
+    if form.LDL:
+        session['ldl'] = form.LDL
+    if form.HDL:
+        session['hdl'] = form.HDL
+    if form.Age:
+        session['triglycerides'] = form.Triglycerides
+
+
+@app.route('/cholesterol', methods=['GET', 'POST'])
+def cholesterol_risk_assessment():
+    form = CholesterolDataForm(request.form)
+    update_session_variables_cholesterol(form)
+    if request.method == 'POST' and form.validate():
+        result = compute_cholesterol_risk(form.HDL.data, form.LDL.data, form.Gender.data)
     else:
         result = None
 
