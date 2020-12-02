@@ -19,7 +19,7 @@ def generate_plt():
     # Use time since Jan 1, 1970 in filename in order make
     # a unique filename that the browser has not cached
 
-    plotfile = os.path.join('static', str(time.time()) + '.png')
+    plotfile = os.path.join('./static', str(time.time()) + '.png')
     plt.savefig(plotfile)
     return plotfile
 
