@@ -8,11 +8,13 @@
     <h1>Hello, {% if name %}{{ name }}{% else %}Stranger{% endif %}!</h1>
 </div>
 
-    <p align="center"><a href=user ><button class=grey style="height:75px;width:150px">Enter User Data</button></a></p>
-    <p align="center"><a href=bmi ><button class=grey style="height:75px;width:150px">See BMI Graph</button></a></p>
-    <p align="center"><a href=stroke ><button class=grey style="height:75px;width:150px">Compute Stroke Risk</button></a></p>
-    <p align="center"><a href=heart ><button class=grey style="height:75px;width:150px">Compute Heart Attack Risk</button></a></p>
-    <p align="center"><a href=cholesterol ><button class=grey style="height:75px;width:150px">Compute Cholesterol Risk</button></a></p>
+    <div class="w3-container">
+        <p align="center"><a href=user ><button class=grey style="font-weight:bold;height:75px;width:250px" >Enter User Data</button></a></p>
+        <p align="center"><a href=bmi ><button class=grey style="font-weight:bold;height:75px;width:250px" >See BMI Graph</button></a></p>
+        <p align="center"><a href=stroke ><button class=grey style="font-weight:bold;height:75px;width:250px"> Compute Stroke Risk</button></a></p>
+        <p align="center"><a href=heart ><button class=grey style="font-weight:bold;height:75px;width:250px"> Compute Heart Attack Risk</button></a></p>
+        <p align="center"><a href=cholesterol ><button class=grey style="font-weight:bold;height:75px;width:250px"> Compute Cholesterol Risk</button></a></p>
+    </div>
 
 {{ wtf.quick_form(form) }}
 {% endblock %}

@@ -34,8 +34,7 @@ def user():
         result = None
         time_str = ""
 
-    link = "http://www.pythonanywhere.com/user/efhayes2/files/home/efhayes2/static/" + time_str
-    return render_template('view.html', form=form, result=result, link=link)
+    return call_render_template('view.html', result, time_str, form)
 
 
 @app.route('/stroke', methods=['GET', 'POST'])
@@ -50,8 +49,68 @@ def stroke_data():
         result = None
         time_str = ""
 
-    link = "http://www.pythonanywhere.com/user/efhayes2/files/home/efhayes2/static/" + time_str
-    return render_template('view.html', form=form, result=result, link=link)
+    return call_render_template('view.html', result, time_str, form)
+
+
+@app.route('/bmi', methods=['GET', 'POST'])
+def bmi():
+    form = BmiForm(request.form)
+    if request.method == 'POST' and form.validate():
+        result, time_str = compute_bmi(form.Weight.data, form.Height.data)
+    else:
+        result = None
+        time_str = ""
+
+    return call_render_template('view.html', result, time_str, form)
+    # link = "http://www.pythonanywhere.com/user/efhayes2/files/home/efhayes2/static/" + time_str
+    # return render_template('view.html', form=form, result=result, link=link)
+
+
+@app.route('/heart', methods=['GET', 'POST'])
+def heart_attack_assessment():
+    form = HeartAttackDataForm(request.form)
+    if request.method == 'POST' and form.validate():
+        result, time_str = compute_heart_attack_risk(form.SystolicBloodPressure.data)
+    else:
+        result = None
+        time_str = ""
+
+    return call_render_template('view.html', result, time_str, form)
+
+
+def update_session_variables_cholesterol(form):
+    if form.Age:
+        session['age'] = form.Age
+    if form.Gender:
+        session['gender'] = form.Gender
+    if form.LDL:
+        session['ldl'] = form.LDL
+    if form.HDL:
+        session['hdl'] = form.HDL
+    if form.Age:
+        session['triglycerides'] = form.Triglycerides
+
+
+@app.route('/cholesterol', methods=['GET', 'POST'])
+def cholesterol_risk_assessment():
+    form = CholesterolDataForm(request.form)
+    update_session_variables_cholesterol(form)
+    if request.method == 'POST' and form.validate():
+        result, time_str = compute_cholesterol_risk(form.HDL.data, form.LDL.data, form.Gender.data)
+    else:
+        result = None
+        time_str = ""
+
+    return call_render_template('view.html', result, time_str, form)
+
+
+def call_render_template(page, result, time_str, form):
+    if time_str == "":
+        link = ""
+    else:
+        link = "http://www.pythonanywhere.com/user/efhayes2/files/home/efhayes2/static/" + time_str
+    return render_template(page, form=form, result=result, link=link)
+
 
 def update_session_variables_1(form):
     if form.Age:
@@ -104,56 +163,6 @@ def update_session_variables_4(form):
     if form.ActivityLevel:
         session['activity'] = form.ActivityLevel
 
-
-@app.route('/bmi', methods=['GET', 'POST'])
-def bmi():
-    form = BmiForm(request.form)
-    if request.method == 'POST' and form.validate():
-        result, time_str = compute_bmi(form.Weight.data, form.Height.data)
-    else:
-        result = None
-        time_str = ""
-
-    link = "http://www.pythonanywhere.com/user/efhayes2/files/home/efhayes2/static/" + time_str
-    return render_template('view.html', form=form, result=result, link=link)
-
-
-@app.route('/heart', methods=['GET', 'POST'])
-def heart_attack_assessment():
-    form = HeartAttackDataForm(request.form)
-    if request.method == 'POST' and form.validate():
-        result, time_str = compute_heart_attack_risk(form.SystolicBloodPressure.data)
-    else:
-        result = None
-        time_str = ""
-
-    link = "http://www.pythonanywhere.com/user/efhayes2/files/home/efhayes2/static/" + time_str
-    return render_template('view.html', form=form, result=result, link=link)
-
-
-def update_session_variables_cholesterol(form):
-    if form.Age:
-        session['age'] = form.Age
-    if form.Gender:
-        session['gender'] = form.Gender
-    if form.LDL:
-        session['ldl'] = form.LDL
-    if form.HDL:
-        session['hdl'] = form.HDL
-    if form.Age:
-        session['triglycerides'] = form.Triglycerides
-
-
-@app.route('/cholesterol', methods=['GET', 'POST'])
-def cholesterol_risk_assessment():
-    form = CholesterolDataForm(request.form)
-    update_session_variables_cholesterol(form)
-    if request.method == 'POST' and form.validate():
-        result, time_str = compute_cholesterol_risk(form.HDL.data, form.LDL.data, form.Gender.data)
-    else:
-        result = None
-
-    return render_template('view.html', form=form, result=result)
 
 
 if __name__ == '__main__':
