@@ -32,8 +32,10 @@ def user():
         result, time_str = compute_bmi(form.Weight.data, form.Height.data)
     else:
         result = None
+        time_str = ""
 
-    return render_template('view.html', form=form, result=result)
+    link = "http://www.pythonanywhere.com/user/efhayes2/files/home/efhayes2/static/" + time_str
+    return render_template('view.html', form=form, result=result, link=link)
 
 
 @app.route('/stroke', methods=['GET', 'POST'])
@@ -46,9 +48,10 @@ def stroke_data():
         result, time_str = compute_stroke_risk(form.SystolicBloodPressure.data)
     else:
         result = None
+        time_str = ""
 
-    return render_template('view.html', form=form, result=result)
-
+    link = "http://www.pythonanywhere.com/user/efhayes2/files/home/efhayes2/static/" + time_str
+    return render_template('view.html', form=form, result=result, link=link)
 
 def update_session_variables_1(form):
     if form.Age:
@@ -110,7 +113,7 @@ def bmi():
     else:
         result = None
         time_str = ""
-    # time_str = "1606882985.2936282.png"
+
     link = "http://www.pythonanywhere.com/user/efhayes2/files/home/efhayes2/static/" + time_str
     return render_template('view.html', form=form, result=result, link=link)
 
@@ -122,8 +125,10 @@ def heart_attack_assessment():
         result, time_str = compute_heart_attack_risk(form.SystolicBloodPressure.data)
     else:
         result = None
+        time_str = ""
 
-    return render_template('view.html', form=form, result=result)
+    link = "http://www.pythonanywhere.com/user/efhayes2/files/home/efhayes2/static/" + time_str
+    return render_template('view.html', form=form, result=result, link=link)
 
 
 def update_session_variables_cholesterol(form):
