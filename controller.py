@@ -29,7 +29,7 @@ def user():
     update_session_variables_3(form)
 
     if request.method == 'POST' and form.validate():
-        result = compute_bmi(form.Weight.data, form.Height.data)
+        result, time_str = compute_bmi(form.Weight.data, form.Height.data)
     else:
         result = None
 
@@ -43,7 +43,7 @@ def stroke_data():
     update_session_variables_2(form)
 
     if request.method == 'POST' and form.validate():
-        result = compute_stroke_risk(form.SystolicBloodPressure.data)
+        result, time_str = compute_stroke_risk(form.SystolicBloodPressure.data)
     else:
         result = None
 
@@ -106,7 +106,7 @@ def update_session_variables_4(form):
 def bmi():
     form = BmiForm(request.form)
     if request.method == 'POST' and form.validate():
-        result = compute_bmi(form.Weight.data, form.Height.data)
+        result, time_str = compute_bmi(form.Weight.data, form.Height.data)
     else:
         result = None
 
@@ -117,7 +117,7 @@ def bmi():
 def heart_attack_assessment():
     form = HeartAttackDataForm(request.form)
     if request.method == 'POST' and form.validate():
-        result = compute_heart_attack_risk(form.SystolicBloodPressure.data)
+        result, time_str = compute_heart_attack_risk(form.SystolicBloodPressure.data)
     else:
         result = None
 
@@ -142,7 +142,7 @@ def cholesterol_risk_assessment():
     form = CholesterolDataForm(request.form)
     update_session_variables_cholesterol(form)
     if request.method == 'POST' and form.validate():
-        result = compute_cholesterol_risk(form.HDL.data, form.LDL.data, form.Gender.data)
+        result, time_str = compute_cholesterol_risk(form.HDL.data, form.LDL.data, form.Gender.data)
     else:
         result = None
 

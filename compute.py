@@ -19,9 +19,10 @@ def generate_plt():
     # Use time since Jan 1, 1970 in filename in order make
     # a unique filename that the browser has not cached
 
-    plotfile = os.path.join('./static', str(time.time()) + '.png')
+    time_str = str(time.time()) + '.png'
+    plotfile = os.path.join('./static', time_str)
     plt.savefig(plotfile)
-    return plotfile
+    return plotfile, time_str
 
 
 def bmi(weight, height):
@@ -79,25 +80,14 @@ def compute_cholesterol_risk(hdl, ldl, gender):
     axs[1].set_title('[FAKE DATA] Heart Attack Risk before age 70 as a function of HDL')
     axs[1].set(xlabel='HDL (mg/dL)', ylabel='Heart Attack Probability')
 
-    #fig.tight_layout()
+    # fig.tight_layout()
 
     remove_png_files()
+    return generate_plt()
 
-    plotfile = os.path.join('static', str(time.time()) + '.png')
-    plt.savefig(plotfile)
-    return plotfile
-    # plt.figure()  # needed to avoid adding curves in plot
-    # plt.plot(ldl_base, y_ldl)
-    # # plt.plot(hdl_base, y_hdl)
-    # plt.title('[FAKE DATA] Heart Attack Risk before age 70 as a function of hdl and ldl.')
-    # remove_png_files()
-    # ldl_plt = generate_plt(plt)
-    #
-    # plt.figure()  # needed to avoid adding curves in plot
-    # plt.plot(hdl_base, y_hdl)
-    # plt.title('[FAKE DATA] Heart Attack Risk before age 70 as a function of hdl and ldl.')
-    # hdl_plt = generate_plt(plt)
-    # return ldl_plt, hdl_plt
+    # plotfile = os.path.join('static', str(time.time()) + '.png')
+    # plt.savefig(plotfile)
+    # return plotfile
 
 
 def compute_stroke_risk(sys_bp):
