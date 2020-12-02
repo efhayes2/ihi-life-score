@@ -1,4 +1,4 @@
-from wtforms import Form, FloatField, BooleanField, RadioField, SelectField, validators, StringField, SubmitField
+from wtforms import Form, FloatField,  SelectField, validators, StringField, SubmitField, HiddenField
 from flask_wtf import FlaskForm
 from wtforms.validators import DataRequired
 
@@ -34,6 +34,8 @@ class UserDataForm(Form):
     choices = ['sedentary', 'light', 'moderate', 'very active']
     ActivityLevel = SelectField(label='Activity Level', choices=choices, validators=v)
 
+    # GraphLink = HiddenField()
+
 
 class HeartAttackDataForm(Form):
 
@@ -57,6 +59,7 @@ class HeartAttackDataForm(Form):
 
     choices = ['sedentary', 'light', 'moderate', 'very active']
     ActivityLevel = SelectField(label='Activity Level', choices=choices, validators=v)
+    # GraphLink = HiddenField()
 
 
 class DiabetesDataForm(Form):
@@ -69,6 +72,7 @@ class DiabetesDataForm(Form):
     Girth = FloatField(label='Girth (in.)', default=32.0, validators=v)
     choices = ['sedentary', 'light', 'moderate', 'very active']
     ActivityLevel = SelectField(label='Activity Level', choices=choices, validators=v)
+    # GraphLink = HiddenField()
 
 
 class CholesterolDataForm(Form):
@@ -79,6 +83,7 @@ class CholesterolDataForm(Form):
     LDL = FloatField(label='LDL', default=100, validators=v)
     HDL = FloatField(label='HDL', default=50, validators=v)
     Triglycerides = FloatField(label='Triglycerides', default=150, validators=v)
+    # GraphLink = HiddenField()
 
 
 class StrokeDataForm(Form):
@@ -103,14 +108,13 @@ class StrokeDataForm(Form):
     choices = ['sedentary', 'light', 'moderate', 'very active']
     ActivityLevel = SelectField(label='Activity Level', choices=choices, validators=v)
 
+    # GraphLink = HiddenField()
+
 
 class BmiForm(Form):
-    Weight = FloatField(
-        label='Weight (lbs)', default=180,
-        validators=[validators.InputRequired()])
-    Height = FloatField(
-        label='Height (in)', default=70,
-        validators=[validators.InputRequired()])
+    Weight = FloatField(label='Weight (lbs)', default=180, validators=v)
+    Height = FloatField(label='Height (in)', default=70, validators=v)
+    # GraphLink = HiddenField()
 
 
 # {% extends "base.html" %}
