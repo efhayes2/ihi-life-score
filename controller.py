@@ -110,7 +110,7 @@ def bmi():
     else:
         result = None
         time_str = ""
-    time_str = "1606882985.2936282.png"
+    # time_str = "1606882985.2936282.png"
     link = "http://www.pythonanywhere.com/user/efhayes2/files/home/efhayes2/static/" + time_str
     return render_template('view.html', form=form, result=result, link=link)
 
