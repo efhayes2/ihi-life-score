@@ -34,7 +34,7 @@ def compute_bmi(weight, height):
     y = bmi(w, height)
     plt.figure()  # needed to avoid adding curves in plot
     axs = plt.plot(w, y)
-    plt.title('BMI as a function of weight.')
+    plt.title('BMI as a function of weight')
     plt.xlabel(xlabel='weight (lbs)')
     plt.ylabel(ylabel='BMI')
     remove_png_files()
@@ -97,7 +97,7 @@ def compute_stroke_risk(sys_bp):
     y = stroke_risk(base_line)
     plt.figure()  # needed to avoid adding curves in plot
     plt.plot(base_line, y)
-    plt.title('[FAKE DATA] Stroke Risk before age 70 as a function of sys bp.')
+    plt.title('[FAKE DATA] Stroke Risk before age 70 as a function of sys bp')
     plt.xlabel(xlabel='Systolic BP')
     plt.ylabel(ylabel='Probability')
     remove_png_files()
@@ -109,7 +109,7 @@ def compute_heart_attack_risk(sys_bp):
     y = stroke_risk(base_line)
     plt.figure()  # needed to avoid adding curves in plot
     plt.plot(base_line, y)
-    plt.title('[FAKE DATA] Heart Attack Risk before age 70 as a function of sys bp.')
+    plt.title('[FAKE DATA] Heart Attack Risk before age 70 as a function of sys bp')
     plt.xlabel(xlabel='Systolic BP')
     plt.ylabel(ylabel='Probability')
 
